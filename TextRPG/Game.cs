@@ -12,6 +12,8 @@ namespace TextRPG
         public static int itog = 0;
         public static void Introduction()
         {
+            Mechanics.Inventory();
+
             Console.WriteLine("Тут должно быть вступление, но я его ещё не придумал");
             Console.WriteLine("Нажмите что-нибудь для продолжения");
             Console.ReadKey();
@@ -30,7 +32,7 @@ namespace TextRPG
             Console.ReadKey();
             Console.Clear();
 
-            while (true)
+            do
             {
                 while (true)
                 {
@@ -68,30 +70,24 @@ namespace TextRPG
                         Mechanics.Sliv();
                         break;
                     case 3:
-                        
+                        Console.WriteLine("Ещё в разработке");
                         break;
                 }
                 if (UserData.HP <= 0)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Ваши характеристики");
-                    Console.WriteLine("HP=" + UserData.HP);
-                    Console.WriteLine("Game over");
-                    Console.ReadKey();
-                    break;
-                }
-                else if (itog == 1)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Ваши характеристики");
-                    Console.WriteLine("HP=" + UserData.HP);
-                    Console.WriteLine("Game over");
-                    Console.ReadKey();
+                    itog = 1;
                     break;
                 }
             }
+            while (itog != 1);
+        
             Console.Clear();
-            }
+            Console.WriteLine("Ваши характеристики");
+            Console.WriteLine("HP=" + UserData.HP);
+            Console.WriteLine("Game over");
+            Console.ReadKey();
+            Console.Clear();
         }
     }
+}
 

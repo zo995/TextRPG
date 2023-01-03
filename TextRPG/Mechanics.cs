@@ -9,8 +9,9 @@ namespace TextRPG
 {
     internal class Mechanics
     {
-        public static int minSliv, mobID, minRN, maxRN, sliv;
+        public static int minSliv, mobID, minRN, maxRN, sliv, inventoryActive = 0;
 
+        public static int[] inventory;
         public static int Rand()
         {
             Random random= new Random();
@@ -76,5 +77,24 @@ namespace TextRPG
             Console.WriteLine();
         }
         
+        public static void Inventory()
+        {
+            if (inventoryActive == 0)
+            {
+                int[] inventory = new int[10];
+                for (int i = 0; i < inventory.Length; i++)
+                {
+                    inventory[i] = 0;
+                }
+                inventoryActive = 1;
+            }
+            else if (inventoryActive == 1)
+            {
+                for(int i=0; i< inventory.Length; i++)
+                {
+                    
+                }
+            }
+        }
     }
 }
