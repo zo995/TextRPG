@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Media;
+using System.Resources;
 
 namespace TextRPG
 {
@@ -95,6 +91,12 @@ namespace TextRPG
                     
                 }
             }
+        }
+        public static void Media()
+        {
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation= "Media\\nejnaya-melodiya-dlya-sna.wav";
+            player.Play();
         }
     }
 }
