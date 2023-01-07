@@ -12,8 +12,6 @@ namespace TextRPG
         public static int itog = 0;
         public static void Introduction()
         {
-            Mechanics.Inventory();
-
             Console.WriteLine("Тут должно быть вступление, но я его ещё не придумал");
             Console.WriteLine("Нажмите что-нибудь для продолжения");
             Console.ReadKey();
@@ -46,12 +44,15 @@ namespace TextRPG
                         Console.WriteLine("1-Бой");
                         Console.WriteLine("2-Защищаться(Шанс" + Mechanics.minSliv + "%)");
                         Console.WriteLine("3-Открыть инвентарь");
+
                         text = Console.ReadLine();
+
                         if (int.TryParse(text, out int Proxod))
                         {
                             number = Proxod;
                             break;
                         }
+
                         Console.Clear();
                         Console.WriteLine("Ошибка ввода");
                     }
@@ -70,7 +71,7 @@ namespace TextRPG
                         Mechanics.Sliv();
                         break;
                     case 3:
-                        Console.WriteLine("Ещё в разработке");
+                        Mechanics.Inventory();
                         break;
                 }
                 if (UserData.HP <= 0)

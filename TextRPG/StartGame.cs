@@ -2,9 +2,10 @@
 {
     internal class StartGame
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Mechanics.Media();
+
             Console.WriteLine("23.10.2022 Начало работы");
             Console.WriteLine("Автор Zo995");
             Console.WriteLine("Нажмите что-нибудь для продолжения");

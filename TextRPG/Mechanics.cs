@@ -5,12 +5,12 @@ namespace TextRPG
 {
     internal class Mechanics
     {
-        public static int minSliv, mobID, minRN, maxRN, sliv, inventoryActive = 0;
+        public static int minSliv, mobID, minRN, maxRN, sliv;
 
-        public static int[] inventory;
+        public static int[] inventory = new int[10];
         public static int Rand()
         {
-            Random random= new Random();
+            Random random= new();
             int i = random.Next(minRN, maxRN);
             return i;
         }
@@ -23,7 +23,7 @@ namespace TextRPG
             sliv = Rand();
             if (minSliv <= sliv)
             {
-                UserData.HP = UserData.HP - 1;
+                UserData.HP -= 1;
                 Console.WriteLine("Неудача. вы потеряли 1hp");
             }
             else
@@ -62,41 +62,37 @@ namespace TextRPG
             sliv = Rand();
             if (minSliv <= sliv)
             {
-                MobData.mobHP = MobData.mobHP - 5;
+                MobData.mobHP -= 5;
                 Console.WriteLine("Повезло, вы смогли ударить врага на 5 урон");
             }
             else
             {
                 Console.WriteLine("Не повезло, враг ударил вас в ответ на 3 урон");
-                UserData.HP = UserData.HP - 3;
+                UserData.HP -= 3;
             }
             Console.WriteLine();
         }
         
         public static void Inventory()
         {
-            if (inventoryActive == 0)
+            for(int i=0; i< inventory.Length; i++)
             {
-                int[] inventory = new int[10];
-                for (int i = 0; i < inventory.Length; i++)
+                if (inventory[i] == 0)
                 {
-                    inventory[i] = 0;
-                }
-                inventoryActive = 1;
-            }
-            else if (inventoryActive == 1)
-            {
-                for(int i=0; i< inventory.Length; i++)
-                {
-                    
+                    Console.WriteLine("Пусто");
                 }
             }
+            Console.WriteLine("Нажмите что-либо, чтобы выйти из инвенторя");
+            Console.ReadKey();
+            Console.Clear();
         }
         public static void Media()
         {
-            SoundPlayer player = new SoundPlayer();
-            player.SoundLocation= "Media\\nejnaya-melodiya-dlya-sna.wav";
-            player.Play();
+            SoundPlayer player = new()
+            {
+                SoundLocation = "Media\\nejnaya-melodiya-dlya-sna.wav"
+            };
+            player.PlayLooping();
         }
     }
 }
