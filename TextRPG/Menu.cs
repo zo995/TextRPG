@@ -20,17 +20,18 @@ namespace TextRPG
                 {
                     Console.WriteLine("Выберите нужный пункт и введите его номер");
                     Console.WriteLine("1 - Старт");
+                    Console.WriteLine("2 - Настройки");
                     text = Console.ReadLine();
                     if (int.TryParse(text, out int proxod))
                     {
-
+                        if (proxod <= 0) { proxod = 1; }
                         number = proxod;
                         break;
                     }
                     Console.Clear();
                     Console.WriteLine("Ошибка ввода");
                 }
-            if (number < 2) { break; };
+            if (number < 3) { break; };
                 Console.Clear();
                 Console.WriteLine("Ошибка ввода");
             }
@@ -40,7 +41,10 @@ namespace TextRPG
             {
                 case 1:
                     Game.Introduction();
-
+                break;
+                
+                case 2:
+                    Setting.MenuSetting();
                 break;
             }
         }

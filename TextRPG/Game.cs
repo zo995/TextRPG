@@ -47,9 +47,10 @@ namespace TextRPG
 
                         text = Console.ReadLine();
 
-                        if (int.TryParse(text, out int Proxod))
+                        if (int.TryParse(text, out int proxod))
                         {
-                            number = Proxod;
+                            if (proxod <= 0) { proxod = 1; }
+                            number = proxod;
                             break;
                         }
 

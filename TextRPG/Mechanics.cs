@@ -86,13 +86,5 @@ namespace TextRPG
             Console.ReadKey();
             Console.Clear();
         }
-        public static void Media()
-        {
-            SoundPlayer player = new()
-            {
-                SoundLocation = "Media\\nejnaya-melodiya-dlya-sna.wav"
-            };
-            player.PlayLooping();
-        }
     }
 }
