@@ -1,8 +1,7 @@
-﻿using System;
+﻿using System.Media;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Media;
-using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
@@ -31,6 +30,7 @@ namespace TextRPG
                 Console.Clear();
                 Console.WriteLine("Ошибка ввода");
             }
+            Console.Clear();
             switch (number)
             {
                 case 1: 

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +23,7 @@ namespace TextRPG
                     Console.WriteLine("Выберите нужный пункт и введите его номер");
                     Console.WriteLine("1 - Старт");
                     Console.WriteLine("2 - Настройки");
+                    Console.WriteLine("3 - Выход");
                     text = Console.ReadLine();
                     if (int.TryParse(text, out int proxod))
                     {
@@ -31,7 +34,7 @@ namespace TextRPG
                     Console.Clear();
                     Console.WriteLine("Ошибка ввода");
                 }
-            if (number < 3) { break; };
+            if (number < 4) { break; };
                 Console.Clear();
                 Console.WriteLine("Ошибка ввода");
             }
@@ -41,11 +44,14 @@ namespace TextRPG
             {
                 case 1:
                     Game.Introduction();
-                break;
+                    break;
                 
                 case 2:
                     Setting.MenuSetting();
-                break;
+                    break;
+                case 3:
+                    
+                    break;
             }
         }
     }
