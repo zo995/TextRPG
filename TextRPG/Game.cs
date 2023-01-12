@@ -22,7 +22,6 @@ namespace TextRPG
         public static void Battle1()
         {
             int number;
-            string text;
 
             Mechanics.MobGenerator();
             Console.WriteLine("О нет, вы повстречали " + MobData.mobName + " " + MobData.mobLevel + " уровня");
@@ -34,29 +33,17 @@ namespace TextRPG
             {
                 while (true)
                 {
-                    while (true)
-                    {
-                        Console.WriteLine("Ваши характеристики");
-                        Console.WriteLine("HP=" + UserData.HP);
-                        Console.WriteLine("Характеристики врага");
-                        Console.WriteLine("HP=" + MobData.mobHP);
-                        Console.WriteLine("Выберте один из вариантов");
-                        Console.WriteLine("1-Бой");
-                        Console.WriteLine("2-Защищаться(Шанс" + Mechanics.minSliv + "%)");
-                        Console.WriteLine("3-Открыть инвентарь");
+                    
+                    Console.WriteLine("Ваши характеристики");
+                    Console.WriteLine("HP=" + UserData.HP);
+                    Console.WriteLine("Характеристики врага");
+                    Console.WriteLine("HP=" + MobData.mobHP);
+                    Console.WriteLine("Выберте один из вариантов");
+                    Console.WriteLine("1-Бой");
+                    Console.WriteLine("2-Защищаться(Шанс" + Mechanics.minSliv + "%)");
+                    Console.WriteLine("3-Открыть инвентарь");
 
-                        text = Console.ReadLine();
-
-                        if (int.TryParse(text, out int proxod))
-                        {
-                            if (proxod <= 0) { proxod = 1; }
-                            number = proxod;
-                            break;
-                        }
-
-                        Console.Clear();
-                        Console.WriteLine("Ошибка ввода");
-                    }
+                    number = Mechanics.WriteLineInt();
                     if (number < 4) { break; };
                     Console.Clear();
                     Console.WriteLine("Ошибка ввода");

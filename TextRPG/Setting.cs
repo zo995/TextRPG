@@ -14,22 +14,13 @@ namespace TextRPG
         public static void MenuSetting()
         {
             int number;
-            string text;
-            while (true)
-            {
-                Console.WriteLine("Настройки");
-                Console.WriteLine("1-Вкл/Выкл музыки");
-                Console.WriteLine("2-Выход");
-                text = Console.ReadLine();
-                if (int.TryParse(text, out int proxod))
-                {
-                    if (proxod <= 0) { proxod = 1; }
-                    number = proxod;
-                    break;
-                }
-                Console.Clear();
-                Console.WriteLine("Ошибка ввода");
-            }
+            
+            Console.WriteLine("Настройки");
+            Console.WriteLine("1-Вкл/Выкл музыки");
+            Console.WriteLine("2-Выход");
+            number = Mechanics.WriteLineInt();
+
+
             Console.Clear();
             switch (number)
             {

@@ -10,7 +10,5 @@ namespace TextRPG
     {
         public static int HP = 100, userPower = 10;
         public static string nameHero="Некто";
-
-
     }
 }

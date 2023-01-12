@@ -1,5 +1,6 @@
 ﻿using System.Media;
 using System.Resources;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TextRPG
 {
@@ -85,6 +86,23 @@ namespace TextRPG
             Console.WriteLine("Нажмите что-либо, чтобы выйти из инвенторя");
             Console.ReadKey();
             Console.Clear();
+        }
+
+        public static int WriteLineInt()
+        {
+            int number;
+            while (true)
+            {
+                string text = Console.ReadLine();
+                if (int.TryParse(text, out int proxod))
+                {
+                    if (proxod <= 0) { proxod = 1; }
+                    number = proxod;
+                    break;
+                }
+                Console.WriteLine("Ошибка ввода");
+            }
+            return number;
         }
     }
 }
