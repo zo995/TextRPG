@@ -38,22 +38,25 @@ namespace TextRPG
 
         public static void MobGenerator()
         {
-            string[] MobList = {"Гоблин", "Змея", "Крыса" };
-            int[] MinLevel = {1,1,1};
-            int[] MaxLevel = {5,5,5};
-            int[] SlivMob = {20, 30, 50};
+            string[] mobList = {"Гоблин", "Змея", "Крыса"};
+            int[] minLevel = {1,1,1};
+            int[] maxLevel = {5,5,5};
+            int[] slivMob = {20, 30, 50};
+            int[] mobHP = {50, 30, 20};
+
+            MobData.mobHP = mobHP[mobID];
 
             minRN = 0;
             maxRN= 2;
             mobID = Rand();
 
-            MobData.mobName = MobList[mobID];
+            MobData.mobName = mobList[mobID];
 
-            minRN = MinLevel[mobID];
-            maxRN = MaxLevel[mobID];
+            minRN = minLevel[mobID];
+            maxRN = maxLevel[mobID];
             MobData.mobLevel = Rand();
 
-            minSliv = SlivMob[mobID];
+            minSliv = slivMob[mobID];
         }
 
         public static void Attac()
@@ -63,13 +66,22 @@ namespace TextRPG
             sliv = Rand();
             if (minSliv <= sliv)
             {
-                MobData.mobHP -= 5;
-                Console.WriteLine("Повезло, вы смогли ударить врага на 5 урон");
+                minRN= 2;
+                maxRN = 7;
+                int damage = Rand();
+
+                MobData.mobHP -= damage;
+                Console.WriteLine("Повезло, вы смогли ударить врага на " + damage + " урон");
             }
             else
             {
-                Console.WriteLine("Не повезло, враг ударил вас в ответ на 3 урон");
-                UserData.HP -= 3;
+                minRN = 1;
+                maxRN = 4;
+                int damage = Rand();
+
+                UserData.HP -= damage;
+
+                Console.WriteLine("Не повезло, враг ударил вас в ответ на " + damage + " урон");
             }
             Console.WriteLine();
         }

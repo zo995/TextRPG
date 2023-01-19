@@ -37,6 +37,8 @@ namespace TextRPG
                     Console.WriteLine("Ваши характеристики");
                     Console.WriteLine("HP=" + UserData.HP);
                     Console.WriteLine("Характеристики врага");
+                    Console.WriteLine("Имя: " + MobData.mobName);
+                    Console.WriteLine("Уровень: " + MobData.mobLevel);
                     Console.WriteLine("HP=" + MobData.mobHP);
                     Console.WriteLine("Выберте один из вариантов");
                     Console.WriteLine("1-Бой");
@@ -66,6 +68,13 @@ namespace TextRPG
                 {
                     itog = 1;
                     break;
+                }
+                if (MobData.mobHP <= 0)
+                {
+                    Console.WriteLine("Молодец, ты убил " + MobData.mobName + " " + MobData.mobLevel + " уровня");
+                    Console.ReadKey();
+                    Console.Clear();
+                    Game.Battle1();
                 }
             }
             while (itog != 1);
