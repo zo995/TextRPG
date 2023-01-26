@@ -22,10 +22,11 @@ namespace TextRPG
                 Console.WriteLine("2 - Настройки");
                 Console.WriteLine("3 - Выход");
 
-                number = Mechanics.WriteLineInt();
+                number = Mechanics.ReadLineInt();
                 if (number < 4) { break; };
                 Console.Clear();
-                Console.WriteLine("Ошибка ввода");
+                Console.WriteLine("Ошибка ввода числа");
+                Console.WriteLine();
             }
             Console.Clear();
 

@@ -21,10 +21,11 @@ namespace TextRPG
                 Console.WriteLine("1-Вкл/Выкл музыки");
                 Console.WriteLine("2-Выход");
 
-                number = Mechanics.WriteLineInt();
+                number = Mechanics.ReadLineInt();
                 if (number < 3) { break; };
                 Console.Clear();
-                Console.WriteLine("Ошибка ввода");
+                Console.WriteLine("Ошибка ввода числа");
+                Console.WriteLine();
             }
 
             Console.Clear();

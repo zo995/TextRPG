@@ -94,13 +94,17 @@ namespace TextRPG
                 {
                     Console.WriteLine("Пусто");
                 }
+                else if (inventory[i] == 1)
+                {
+                    Console.WriteLine("Зелье лечения");
+                }
             }
             Console.WriteLine("Нажмите что-либо, чтобы выйти из инвенторя");
             Console.ReadKey();
             Console.Clear();
         }
 
-        public static int WriteLineInt()
+        public static int ReadLineInt()
         {
             int number;
             while (true)
