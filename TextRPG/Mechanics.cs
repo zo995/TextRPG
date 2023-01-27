@@ -6,7 +6,9 @@ namespace TextRPG
 {
     internal class Mechanics
     {
-        public static int minSliv, mobID, minRN, maxRN, sliv;
+        public static int minSliv, mobID, minRN, maxRN, sliv, number, numberC;
+
+        public static string nameItem;
 
         public static int[] inventory = new int[10];
         public static int Rand()
@@ -88,25 +90,104 @@ namespace TextRPG
         
         public static void Inventory()
         {
-            for(int i=0; i< inventory.Length; i++)
+            while (true)
             {
-                if (inventory[i] == 0)
+
+
+                while (true)
                 {
-                    Console.WriteLine("Пусто");
+
+                    for (int i = 0; i < inventory.Length; i++)
+                    {
+                        switch (inventory[i])
+                        {
+                            case 0:
+                                Console.WriteLine("Пусто");
+                                break;
+                            case 1:
+                                Console.WriteLine("Зелье лечения");
+                                break;
+                        }
+                    }
+                    Console.WriteLine("1-10 - Выбрать предмет");
+                    Console.WriteLine("0 - Назад");
+
+                    while (true)
+                    {
+                        string text = Console.ReadLine();
+                        if (int.TryParse(text, out int proxod))
+                        {
+                            if (proxod < 0) { proxod = 0; }
+                            number = proxod;
+                            break;
+                        }
+                        Console.WriteLine("Ошибка ввода");
+                    }
+                    if (number < 11) { break; }
+                    Console.Clear();
+                    Console.WriteLine("Ошибка ввода числа");
+                    Console.WriteLine(" ");
                 }
-                else if (inventory[i] == 1)
+                Console.Clear();
+                if (number == 0)
                 {
-                    Console.WriteLine("Зелье лечения");
+                    break;
+                }
+
+                if (inventory[number - 1] == 0)
+                {
+                    Console.WriteLine("Ты выбрал пустоту");
+                    Console.WriteLine();
+                    Inventory();
+                }
+                else
+                {
+                    while (true)
+                    {
+                        switch (inventory[number - 1])
+                        {
+                            case 1:
+                                nameItem = "Зелье лечения";
+                                numberC = number - 1;
+                                break;
+                        }
+                        Console.WriteLine("Выбран предмет: " + nameItem);
+                        Console.WriteLine("Теперь выбери, что с ним делать");
+                        Console.WriteLine("1 - Использовать");
+                        Console.WriteLine("2 - Назад");
+
+                        number = ReadLineInt();
+                        Console.Clear();
+                        if (number < 3) { break; };
+                        Console.WriteLine("Ошибка ввода числа");
+                        Console.WriteLine();
+                    }
+                    switch (number)
+                    {
+                        case 1:
+                            switch (inventory[numberC])
+                            {
+                                case 1:
+                                    Console.WriteLine("Использовано зелье лечения");
+                                    Console.WriteLine("Ваш уровень здоровья увеничен на 20");
+                                    UserData.HP = +20;
+                                    inventory[numberC] = 0;
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                    break;
+                            }
+                            break;
+                        case 2:
+                            Console.WriteLine();
+                            Inventory();
+                            break;
+                    }
                 }
             }
-            Console.WriteLine("Нажмите что-либо, чтобы выйти из инвенторя");
-            Console.ReadKey();
-            Console.Clear();
         }
 
         public static int ReadLineInt()
         {
-            int number;
             while (true)
             {
                 string text = Console.ReadLine();

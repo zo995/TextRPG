@@ -17,7 +17,7 @@ namespace TextRPG
             Console.WriteLine("Нажмите что-нибудь для продолжения");
             Console.ReadKey();
             Console.Clear();
-            Game.Battle1();
+            Battle1();
         }
 
         public static void Battle1()
@@ -107,6 +107,7 @@ namespace TextRPG
             while (itog != 1);
         
             Console.Clear();
+            Console.WriteLine("В общей сложности вы убили:" + UserData.killUnit);
             Console.WriteLine("Ваши характеристики");
             Console.WriteLine("HP=" + UserData.HP);
             Console.WriteLine("Game over");
