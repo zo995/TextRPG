@@ -1,7 +1,4 @@
-﻿using System.Media;
-using System.Resources;
-using static System.Net.Mime.MediaTypeNames;
-
+﻿
 namespace TextRPG
 {
     internal class Mechanics
@@ -96,17 +93,12 @@ namespace TextRPG
 
                 while (true)
                 {
-
-                    for (int i = 0; i < inventory.Length; i++)
+                    foreach(int slot in inventory)
                     {
-                        switch (inventory[i])
+                        switch (slot)
                         {
-                            case 0:
-                                Console.WriteLine("Пусто");
-                                break;
-                            case 1:
-                                Console.WriteLine("Зелье лечения");
-                                break;
+                            case 0: Console.WriteLine("Пусто"); break;
+                            case 1: Console.WriteLine("Зелье лечения"); break;
                         }
                     }
                     Console.WriteLine("1-10 - Выбрать предмет");
@@ -144,14 +136,15 @@ namespace TextRPG
                 {
                     while (true)
                     {
-                        switch (inventory[number - 1])
+                        foreach (int slot in inventory)
                         {
-                            case 1:
-                                nameItem = "Зелье лечения";
-                                numberC = number - 1;
-                                break;
+                            switch (slot)
+                            {
+                                case 1: Console.WriteLine("Зелье лечения"); break;
+                            }
                         }
                         Console.WriteLine("Выбран предмет: " + nameItem);
+                        numberC = number - 1;
                         Console.WriteLine("Теперь выбери, что с ним делать");
                         Console.WriteLine("1 - Использовать");
                         Console.WriteLine("2 - Назад");
@@ -165,17 +158,21 @@ namespace TextRPG
                     switch (number)
                     {
                         case 1:
-                            switch (inventory[numberC])
+                            foreach (int slot in inventory)
                             {
-                                case 1:
-                                    Console.WriteLine("Использовано зелье лечения");
-                                    Console.WriteLine("Ваш уровень здоровья увеничен на 20");
-                                    UserData.HP = +20;
-                                    inventory[numberC] = 0;
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    break;
+                                switch (slot)
+                                {
+                                    case 1:
+                                        Console.WriteLine("Ваш уровень здоровья увеничен на 20");
+                                        UserData.HP += 20;
+                                        if (UserData.HP >= 100) { UserData.HP = 100; }
+                                        inventory[numberC] = 0;
+                                        break;
+                                }
                             }
+                            Console.WriteLine("Использовано: " + nameItem);
+                            Console.ReadKey();
+                            Console.Clear();
                             break;
                         case 2:
                             Console.WriteLine();
