@@ -29,15 +29,16 @@ namespace TextRPG
                 {
                     Console.WriteLine("Общее число убитых врагов: " + UserData.killUnit);
                     Console.WriteLine("Ваши характеристики");
-                    Console.WriteLine("HP=" + UserData.HP);
+                    Console.WriteLine("HP = " + UserData.HP + " Power = " + (2 + UserData.userPower) + "-" + (7 + UserData.userPower));
                     Console.WriteLine("Характеристики врага");
                     Console.WriteLine("Имя: " + MobData.mobName);
                     Console.WriteLine("Уровень: " + MobData.mobLevel);
-                    Console.WriteLine("HP=" + MobData.mobHP);
+                    Console.WriteLine("HP = " + MobData.mobHP);
                     Console.WriteLine("Выберте один из вариантов");
-                    Console.WriteLine("1-Бой");
-                    Console.WriteLine("2-Защищаться(Шанс" + Mechanics.minSliv + "%)");
-                    Console.WriteLine("3-Открыть инвентарь");
+                    Console.WriteLine("1 - Бой");
+                    Console.WriteLine("2 - Защищаться(Шанс" + Mechanics.minSliv + "%)");
+                    Console.WriteLine("3 - Открыть инвентарь");
+                    Console.WriteLine("0 - Выйти");
 
                     number = Mechanics.ReadLineInt();
                     if (number < 4) { break; };
@@ -58,6 +59,9 @@ namespace TextRPG
                     case 3:
                         Mechanics.Inventory();
                         break;
+                    case 0:
+                        itog = 1;
+                        break;
                 }
                 if (UserData.HP <= 0)
                 {
@@ -72,9 +76,9 @@ namespace TextRPG
                     Mechanics.minRN= 1;
                     Mechanics.maxRN= 100;
                     int loot = Mechanics.Rand();
-                    i = 0;
                     if (loot <= 15)
                     {
+                        i = 0;
                         Console.WriteLine("Вам выпало: Зелье лечения");
                         while (true)
                         {
@@ -91,6 +95,26 @@ namespace TextRPG
                             i++;
                         }
                     }
+                    if (loot <= 10)
+                    {
+                        i = 0;
+                        Console.WriteLine("Вам выпало: Деревянный меч");
+                        while (true)
+                        {
+                            if (Mechanics.inventory[i] == 0)
+                            {
+                                Mechanics.inventory[i] = 2;
+                                break;
+                            }
+                            if (i == Mechanics.inventory.Length - 1)
+                            {
+                                Console.WriteLine("Предмет не получен");
+                                break;
+                            }
+                            i++;
+                        }
+                    }
+
                     Console.WriteLine("Нажмите что-нибудь, чтобы продолжить");
                     Console.ReadKey();
                     Console.Clear();
@@ -103,7 +127,7 @@ namespace TextRPG
             Console.WriteLine("В общей сложности вы убили:" + UserData.killUnit);
             Console.WriteLine("Ваши характеристики");
             Console.WriteLine("HP=" + UserData.HP);
-            Console.WriteLine("Game over");
+            if (number != 0) { Console.WriteLine("Game over"); }
             Console.ReadKey();
             Console.Clear();
         }

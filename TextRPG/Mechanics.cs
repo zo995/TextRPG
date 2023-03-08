@@ -76,7 +76,7 @@ namespace TextRPG
             {
                 minRN = 1;
                 maxRN = 4;
-                int damage = Rand();
+                int damage = Rand() + UserData.PowerBust();
 
                 UserData.HP -= damage;
 
@@ -99,22 +99,13 @@ namespace TextRPG
                         {
                             case 0: Console.WriteLine("Пусто"); break;
                             case 1: Console.WriteLine("Зелье лечения"); break;
+                            case 2: Console.WriteLine("Деревянный меч"); break;
                         }
                     }
                     Console.WriteLine("1-10 - Выбрать предмет");
                     Console.WriteLine("0 - Назад");
 
-                    while (true)
-                    {
-                        string text = Console.ReadLine();
-                        if (int.TryParse(text, out int proxod))
-                        {
-                            if (proxod < 0) { proxod = 0; }
-                            number = proxod;
-                            break;
-                        }
-                        Console.WriteLine("Ошибка ввода");
-                    }
+                    number = ReadLineInt();
                     if (number < 11) { break; }
                     Console.Clear();
                     Console.WriteLine("Ошибка ввода числа");
@@ -130,24 +121,23 @@ namespace TextRPG
                 {
                     Console.WriteLine("Ты выбрал пустоту");
                     Console.WriteLine();
-                    Inventory();
                 }
                 else
                 {
+                    numberC = number - 1;
+                    switch (numberC)
+                    {
+                        case 1: nameItem = "Зелье лечения"; break;
+                        case 2: nameItem = "Деревянный меч"; break;
+                    }
                     while (true)
                     {
-                        foreach (int slot in inventory)
-                        {
-                            switch (slot)
-                            {
-                                case 1: Console.WriteLine("Зелье лечения"); break;
-                            }
-                        }
+                        Console.Clear();
                         Console.WriteLine("Выбран предмет: " + nameItem);
-                        numberC = number - 1;
                         Console.WriteLine("Теперь выбери, что с ним делать");
                         Console.WriteLine("1 - Использовать");
-                        Console.WriteLine("2 - Назад");
+                        Console.WriteLine("2 - Удалить");
+                        Console.WriteLine("0 - Назад");
 
                         number = ReadLineInt();
                         Console.Clear();
@@ -168,15 +158,21 @@ namespace TextRPG
                                         if (UserData.HP >= 100) { UserData.HP = 100; }
                                         inventory[numberC] = 0;
                                         break;
+                                    case 2:
+                                        Console.WriteLine("Урон увеличен на 2");
+                                        UserData.swordID = 2;
+                                        inventory[numberC] = 0;
+                                        break;
                                 }
+                                break;
                             }
                             Console.WriteLine("Использовано: " + nameItem);
+                            Console.WriteLine("Нажмите что-нибудь, чтобыы продолжить");
                             Console.ReadKey();
                             Console.Clear();
                             break;
                         case 2:
-                            Console.WriteLine();
-                            Inventory();
+                            inventory[numberC] = 0;
                             break;
                     }
                 }
@@ -190,7 +186,7 @@ namespace TextRPG
                 string text = Console.ReadLine();
                 if (int.TryParse(text, out int proxod))
                 {
-                    if (proxod <= 0) { proxod = 1; }
+                    if (proxod < 0) { proxod = 0; }
                     number = proxod;
                     break;
                 }
