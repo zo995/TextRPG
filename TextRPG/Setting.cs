@@ -12,11 +12,11 @@ namespace TextRPG
             while (true)
             {
                 Console.WriteLine("Настройки");
-                Console.WriteLine("1-Вкл/Выкл музыки");
-                Console.WriteLine("2-Выход");
+                Console.WriteLine("1 - Вкл/Выкл музыки");
+                Console.WriteLine("0 - Выход");
 
                 number = Mechanics.ReadLineInt();
-                if (number < 3) { break; };
+                if (number < 2) { break; };
                 Console.Clear();
                 Console.WriteLine("Ошибка ввода числа");
                 Console.WriteLine();
@@ -39,7 +39,7 @@ namespace TextRPG
                     break;
 
                 case 2:
-                    Menu.Base();
+
                     break;
             }
         }

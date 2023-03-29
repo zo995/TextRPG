@@ -10,6 +10,9 @@ namespace TextRPG
             Console.WriteLine("Нажмите что-нибудь для продолжения");
             Console.ReadKey();
             Console.Clear();
+
+
+
             Battle1();
         }
 
@@ -18,25 +21,21 @@ namespace TextRPG
             int number;
 
             Mechanics.MobGenerator();
-            Console.WriteLine("О нет, вы повстречали " + MobData.mobName + " " + MobData.mobLevel + " уровня");
-            Console.WriteLine("Нажмите что-нибудь для продолжения");
-            Console.ReadKey();
-            Console.Clear();
 
             do
             {
                 while (true)
                 {
-                    Console.WriteLine("Общее число убитых врагов: " + UserData.killUnit);
+                    Console.WriteLine($"Общее число убитых врагов: { UserData.killUnit}");
                     Console.WriteLine("Ваши характеристики");
-                    Console.WriteLine("HP = " + UserData.HP + " Power = " + (2 + UserData.userPower) + "-" + (7 + UserData.userPower));
+                    Console.WriteLine($"HP = {UserData.HP} Power = {(2 + UserData.userPower)} - {(7 + UserData.userPower)}");
                     Console.WriteLine("Характеристики врага");
-                    Console.WriteLine("Имя: " + MobData.mobName);
-                    Console.WriteLine("Уровень: " + MobData.mobLevel);
-                    Console.WriteLine("HP = " + MobData.mobHP);
+                    Console.WriteLine($"Имя: {MobData.mobName}");
+                    Console.WriteLine($"Уровень: {MobData.mobLevel}");
+                    Console.WriteLine($"HP = {MobData.mobHP}");
                     Console.WriteLine("Выберте один из вариантов");
                     Console.WriteLine("1 - Бой");
-                    Console.WriteLine("2 - Защищаться(Шанс" + Mechanics.minSliv + "%)");
+                    Console.WriteLine($"2 - Защищаться (Шанс {Mechanics.minSliv}%)");
                     Console.WriteLine("3 - Открыть инвентарь");
                     Console.WriteLine("0 - Выйти");
 
@@ -71,7 +70,7 @@ namespace TextRPG
                 if (MobData.mobHP <= 0)
                 {
                     Console.Clear();
-                    Console.WriteLine("Молодец, ты убил " + MobData.mobName + " " + MobData.mobLevel + " уровня");
+                    Console.WriteLine($"Молодец, ты убил {MobData.mobName} {MobData.mobLevel} уровня");
                     UserData.killUnit++;
                     Mechanics.minRN= 1;
                     Mechanics.maxRN= 100;
@@ -114,19 +113,18 @@ namespace TextRPG
                             i++;
                         }
                     }
-
                     Console.WriteLine("Нажмите что-нибудь, чтобы продолжить");
                     Console.ReadKey();
                     Console.Clear();
-                    Battle1();
+                    Mechanics.MobGenerator();
                 }
             }
             while (itog != 1);
         
             Console.Clear();
-            Console.WriteLine("В общей сложности вы убили:" + UserData.killUnit);
+            Console.WriteLine($"В общей сложности вы убили: {UserData.killUnit}");
             Console.WriteLine("Ваши характеристики");
-            Console.WriteLine("HP=" + UserData.HP);
+            Console.WriteLine($"HP= {UserData.HP}");
             if (number != 0) { Console.WriteLine("Game over"); }
             Console.ReadKey();
             Console.Clear();

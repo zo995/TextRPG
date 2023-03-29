@@ -3,7 +3,7 @@ namespace TextRPG
 {
     internal class Mechanics
     {
-        public static int minSliv, mobID, minRN, maxRN, sliv, number, numberC;
+        public static int minSliv, mobID, minRN, maxRN, sliv, number, numberC, admin=0;
 
         public static string nameItem;
 
@@ -56,6 +56,11 @@ namespace TextRPG
             MobData.mobLevel = Rand();
 
             minSliv = slivMob[mobID];
+
+            Console.WriteLine($"О нет, вы повстречали {MobData.mobName} {MobData.mobLevel} уровня");
+            Console.WriteLine("Нажмите что-нибудь для продолжения");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         public static void Attac()
@@ -133,7 +138,7 @@ namespace TextRPG
                     while (true)
                     {
                         Console.Clear();
-                        Console.WriteLine("Выбран предмет: " + nameItem);
+                        Console.WriteLine($"Выбран предмет: {nameItem}");
                         Console.WriteLine("Теперь выбери, что с ним делать");
                         Console.WriteLine("1 - Использовать");
                         Console.WriteLine("2 - Удалить");
@@ -150,7 +155,7 @@ namespace TextRPG
                         case 1:
                             foreach (int slot in inventory)
                             {
-                                switch (slot)
+                                switch (inventory[numberC])
                                 {
                                     case 1:
                                         Console.WriteLine("Ваш уровень здоровья увеничен на 20");
@@ -159,14 +164,14 @@ namespace TextRPG
                                         inventory[numberC] = 0;
                                         break;
                                     case 2:
-                                        Console.WriteLine("Урон увеличен на 2");
+                                        if (UserData.swordID == 2) { Console.WriteLine("Нечего не изменилось"); } else { Console.WriteLine($"Теперь экиперовка {nameItem} увеличивает урон на 2"); }
                                         UserData.swordID = 2;
                                         inventory[numberC] = 0;
                                         break;
                                 }
                                 break;
                             }
-                            Console.WriteLine("Использовано: " + nameItem);
+                            Console.WriteLine($"Использовано: {nameItem}");
                             Console.WriteLine("Нажмите что-нибудь, чтобыы продолжить");
                             Console.ReadKey();
                             Console.Clear();
@@ -187,12 +192,10 @@ namespace TextRPG
                 if (int.TryParse(text, out int proxod))
                 {
                     if (proxod < 0) { proxod = 0; }
-                    number = proxod;
-                    break;
+                    return proxod;
                 }
                 Console.WriteLine("Ошибка ввода");
             }
-            return number;
         }
     }
 }
