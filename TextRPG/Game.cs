@@ -94,7 +94,8 @@ namespace TextRPG
                             i++;
                         }
                     }
-                    if (loot <= 10)
+                    loot = Mechanics.Rand();
+                    if (loot <= 100)
                     {
                         i = 0;
                         Console.WriteLine("Вам выпало: Деревянный меч");

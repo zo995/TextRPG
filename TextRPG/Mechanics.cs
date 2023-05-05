@@ -37,26 +37,39 @@ namespace TextRPG
 
         public static void MobGenerator()
         {
-            string[] mobList = {"Гоблин", "Змея", "Крыса"};
-            int[] minLevel = {1,1,1};
-            int[] maxLevel = {5,5,5};
-            int[] slivMob = {20, 30, 50};
-            int[] mobHP = {50, 30, 20};
+            string[] mobList = { "Гоблин", "Змея", "Крыса" };
+            int[] minLevel = { 1, 1, 1 };
+            int[] maxLevel = { 5, 5, 5 };
+            int[] slivMob = { 20, 30, 50 };
+            int[] mobHP = { 50, 30, 20 };
 
-            MobData.mobHP = mobHP[mobID];
+            if ((UserData.killUnit + 1) % 10 == 0 && UserData.killUnit > 0)
+            {
+                MobData.mobName = "Демон";
 
-            minRN = 0;
-            maxRN= 2;
-            mobID = Rand();
+                minRN = 5; //Минимальный уровень
+                maxRN = 10; //Максимальный уровень
+                MobData.mobLevel = Rand();
 
-            MobData.mobName = mobList[mobID];
+                MobData.mobHP = 100;
 
-            minRN = minLevel[mobID];
-            maxRN = maxLevel[mobID];
-            MobData.mobLevel = Rand();
+                minSliv = 50;
+            }
+            else
+            {
+                minRN = 0;
+                maxRN = 2;
+                mobID = Rand();
 
-            minSliv = slivMob[mobID];
+                MobData.mobName = mobList[mobID];
+                MobData.mobHP = mobHP[mobID];
 
+                minRN = minLevel[mobID];
+                maxRN = maxLevel[mobID];
+                MobData.mobLevel = Rand();
+
+                minSliv = slivMob[mobID];
+            }
             Console.WriteLine($"О нет, вы повстречали {MobData.mobName} {MobData.mobLevel} уровня");
             Console.WriteLine("Нажмите что-нибудь для продолжения");
             Console.ReadKey();
@@ -94,8 +107,6 @@ namespace TextRPG
         {
             while (true)
             {
-
-
                 while (true)
                 {
                     foreach(int slot in inventory)
@@ -130,7 +141,7 @@ namespace TextRPG
                 else
                 {
                     numberC = number - 1;
-                    switch (numberC)
+                    switch (inventory[numberC])
                     {
                         case 1: nameItem = "Зелье лечения"; break;
                         case 2: nameItem = "Деревянный меч"; break;
@@ -164,8 +175,15 @@ namespace TextRPG
                                         inventory[numberC] = 0;
                                         break;
                                     case 2:
-                                        if (UserData.swordID == 2) { Console.WriteLine("Нечего не изменилось"); } else { Console.WriteLine($"Теперь экиперовка {nameItem} увеличивает урон на 2"); }
-                                        UserData.swordID = 2;
+                                        if (UserData.swordID == 2)
+                                        {
+                                            Console.WriteLine("Нечего не изменилось");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine($"Теперь экиперовка {nameItem} увеличивает урон на 2");
+                                            UserData.swordID = 2;
+                                        }
                                         inventory[numberC] = 0;
                                         break;
                                 }
