@@ -3,7 +3,7 @@ namespace TextRPG
 {
     internal class Game
     {
-        public static int itog = 0, i;
+        public static int itog = 0;
         public static void Introduction()
         {
             Console.WriteLine("Тут должно быть вступление, но я его ещё не придумал");
@@ -11,12 +11,10 @@ namespace TextRPG
             Console.ReadKey();
             Console.Clear();
 
-
-
-            Battle1();
+            Battle();
         }
 
-        public static void Battle1()
+        public static void Battle()
         {
             int number;
 
@@ -28,7 +26,7 @@ namespace TextRPG
                 {
                     Console.WriteLine($"Общее число убитых врагов: { UserData.killUnit}");
                     Console.WriteLine("Ваши характеристики");
-                    Console.WriteLine($"HP = {UserData.HP} Power = {(2 + UserData.userPower)} - {(7 + UserData.userPower)}");
+                    Console.WriteLine($"HP = {UserData.HP} Power = {(UserData.userPower + 2)} - {(UserData.userPower + 7)}");
                     Console.WriteLine("Характеристики врага");
                     Console.WriteLine($"Имя: {MobData.mobName}");
                     Console.WriteLine($"Уровень: {MobData.mobLevel}");
@@ -69,59 +67,11 @@ namespace TextRPG
                 }
                 if (MobData.mobHP <= 0)
                 {
-                    Console.Clear();
-                    Console.WriteLine($"Молодец, ты убил {MobData.mobName} {MobData.mobLevel} уровня");
-                    UserData.killUnit++;
-                    Mechanics.minRN= 1;
-                    Mechanics.maxRN= 100;
-                    int loot = Mechanics.Rand();
-                    if (loot <= 15)
-                    {
-                        i = 0;
-                        Console.WriteLine("Вам выпало: Зелье лечения");
-                        while (true)
-                        {
-                            if (Mechanics.inventory[i] == 0)
-                            {
-                                Mechanics.inventory[i] = 1;
-                                break;
-                            }
-                            if (i== Mechanics.inventory.Length- 1)
-                            {
-                                Console.WriteLine("Предмет не получен");
-                                break;
-                            }
-                            i++;
-                        }
-                    }
-                    loot = Mechanics.Rand();
-                    if (loot <= 100)
-                    {
-                        i = 0;
-                        Console.WriteLine("Вам выпало: Деревянный меч");
-                        while (true)
-                        {
-                            if (Mechanics.inventory[i] == 0)
-                            {
-                                Mechanics.inventory[i] = 2;
-                                break;
-                            }
-                            if (i == Mechanics.inventory.Length - 1)
-                            {
-                                Console.WriteLine("Предмет не получен");
-                                break;
-                            }
-                            i++;
-                        }
-                    }
-                    Console.WriteLine("Нажмите что-нибудь, чтобы продолжить");
-                    Console.ReadKey();
-                    Console.Clear();
-                    Mechanics.MobGenerator();
+                    Mechanics.DeadUnit();
                 }
             }
             while (itog != 1);
-        
+            
             Console.Clear();
             Console.WriteLine($"В общей сложности вы убили: {UserData.killUnit}");
             Console.WriteLine("Ваши характеристики");

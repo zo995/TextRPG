@@ -3,7 +3,7 @@ namespace TextRPG
 {
     internal class Mechanics
     {
-        public static int minSliv, mobID, minRN, maxRN, sliv, number, numberC, admin=0;
+        public static int minSliv, mobID, minRN, maxRN, sliv, number, numberC, admin=0, i;
 
         public static string nameItem;
 
@@ -83,8 +83,8 @@ namespace TextRPG
             sliv = Rand();
             if (minSliv <= sliv)
             {
-                minRN= 2;
-                maxRN = 7;
+                minRN= 2 + UserData.userPower;
+                maxRN = 7 + UserData.userPower;
                 int damage = Rand();
 
                 MobData.mobHP -= damage;
@@ -183,6 +183,7 @@ namespace TextRPG
                                         {
                                             Console.WriteLine($"Теперь экиперовка {nameItem} увеличивает урон на 2");
                                             UserData.swordID = 2;
+                                            UserData.PowerBust();
                                         }
                                         inventory[numberC] = 0;
                                         break;
@@ -214,6 +215,58 @@ namespace TextRPG
                 }
                 Console.WriteLine("Ошибка ввода");
             }
+        }
+        public static void DeadUnit()
+        {
+            Console.Clear();
+            Console.WriteLine($"Молодец, ты убил {MobData.mobName} {MobData.mobLevel} уровня");
+            UserData.killUnit++;
+            minRN = 1;
+            maxRN = 100;
+            int loot = Rand();
+            if (loot <= 15)
+            {
+                i = 0;
+                Console.WriteLine("Вам выпало: Зелье лечения");
+                while (true)
+                {
+                    if (inventory[i] == 0)
+                    {
+                        inventory[i] = 1;
+                        break;
+                    }
+                    if (i == inventory.Length - 1)
+                    {
+                        Console.WriteLine("Предмет не получен");
+                        break;
+                    }
+                    i++;
+                }
+            }
+            loot = Rand();
+            if (loot <= 10)
+            {
+                i = 0;
+                Console.WriteLine("Вам выпало: Деревянный меч");
+                while (true)
+                {
+                    if (inventory[i] == 0)
+                    {
+                        inventory[i] = 2;
+                        break;
+                    }
+                    if (i == inventory.Length - 1)
+                    {
+                        Console.WriteLine("Предмет не получен");
+                        break;
+                    }
+                    i++;
+                }
+            }
+            Console.WriteLine("Нажмите что-нибудь, чтобы продолжить");
+            Console.ReadKey();
+            Console.Clear();
+            Mechanics.MobGenerator();
         }
     }
 }
